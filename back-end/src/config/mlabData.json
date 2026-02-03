@@ -1,0 +1,118 @@
+{
+  "mlab": {
+    "programmes": [
+      {
+        "id": "software_development",
+        "name": "Software Development Programme",
+        "description": "mLab offers a Software Development programme focused on full-stack skills.",
+        "duration": "6-12 months",
+        "eligibility": "Unemployed youth aged 18-35",
+        "applications": {
+          "how_to_apply": "Applications are submitted via the mLab website during open intake periods.",
+          "requirements": [
+            "Certified ID",
+            "CV",
+            "Grade 12",
+            "Basic computer literacy"
+          ]
+        },
+        "events": {
+          "open_days": "mLab hosts open days quarterly. Dates are announced on the website."
+        }
+      },
+      {
+        "id": "codetribe_academy",
+        "name": "CodeTribe Academy",
+        "organiser": "mLab",
+        "description": "The CodeTribe Academy is a coding programme that aims to drive inclusive digital innovation and provides training and work experience for youth to develop Android, iOS, and Web solutions. Participants are also up-skilled in cloud technologies, SCRUM agile project management, and soft skills to support employment and self-employment.",
+        "duration": "6 months",
+        "target_audience": "Talented youth in South African townships",
+        "bootcamp": {
+          "duration": "4 weeks",
+          "description": "A bootcamp that upskills applicants with basic web development skills.",
+          "required_for_entry": true,
+          "certification": "Certificate of attendance upon successful completion"
+        },
+        "skills_trained": [
+          "Android development",
+          "iOS development",
+          "Web development",
+          "Cloud technologies",
+          "SCRUM agile project management",
+          "Soft skills"
+        ],
+        "application_process": {
+          "interview_criteria": [
+            "Academic record",
+            "Theoretical knowledge",
+            "Previous projects",
+            "Skills attained through the Bootcamp"
+          ],
+          "how_to_apply": {
+            "info": "Applications are submitted via the application form link provided by mLab.",
+            "application_link": "https://bit.ly/CodeTribe23"
+          }
+        },
+        "locations": {
+          "primary": [
+            "Tshwane (Pretoria), Gauteng",
+            "Soweto, Gauteng",
+            "Tembisa, Gauteng"
+          ],
+          "regional_support": [
+            "Limpopo (bootcamp meetups)",
+            "Northern Cape (bootcamp meetups)"
+          ],
+          "country": "South Africa"
+        }
+      }
+    ],
+
+    "visitor_enquiries": [
+      {
+        "enquiry_id": "ENQ-2026-0001",
+        "visitor": {
+          "full_name": "Jane Doe",
+          "email": "janedoe@email.com",
+          "phone": "+27XXXXXXXXX"
+        },
+        "programme_id": "codetribe_academy",
+        "enquiry_categories": [
+          "programme_information",
+          "application_information",
+          "location_details",
+          "event_details"
+        ],
+        "message": "I would like to know when applications open and which locations are available.",
+        "status": "pending",
+        "priority": "normal",
+        "submitted_at": "2026-02-03T10:30:00Z"
+      }
+    ],
+
+    "enquiry_management": {
+      "logs": [
+        {
+          "enquiry_id": "ENQ-2026-0001",
+          "programme_id": "codetribe_academy",
+          "assigned_to": null,
+          "status": "open",
+          "created_at": "2026-02-03T10:30:00Z",
+          "last_updated": "2026-02-03T10:30:00Z"
+        }
+      ],
+      "escalations": [
+        {
+          "enquiry_id": "ENQ-2026-0001",
+          "reason": "Requires human follow-up",
+          "escalated_to": {
+            "role": "Admin Support",
+            "email": "support@mlab.co.za"
+          },
+          "escalated_at": "2026-02-04T09:00:00Z",
+          "status": "escalated"
+        }
+      ]
+    }
+  }
+}
