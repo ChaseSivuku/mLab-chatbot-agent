@@ -136,7 +136,6 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
               key={msg.id}
               sender={msg.sender}
               text={msg.text}
-              isSpecial={msg.isSpecial}
             />
           ))}
 
