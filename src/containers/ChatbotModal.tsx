@@ -46,7 +46,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
           "Our general eligibility criteria are: South African citizen (18-35), currently unemployed, and a minimum NQF Level 5 in IT or Computer Science.";
         special = true;
       } else {
-        botResponse = `You selected ${category}. How can I help you with that?`;
+        botResponse = `Our general eligibility criteria are: South African citizen (18-35), currently unemployed, and a minimum NQF Level 5 in IT or Computer Science."`;
       }
 
       const botMsg: Message = {
