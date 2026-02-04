@@ -148,15 +148,26 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
 
         <footer className="p-6 bg-white border-t border-zinc-100 flex items-center gap-1">
           <div>
-            <input
-              type="text"
+           <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={(e) =>
-                e.key === "Enter" && handleSendMessage()
-              }
-              placeholder="Type your question here…"
-              className="w-162.5 p-2 bg-white border-2 border-[#003D4D] rounded-xl focus:border-[#003D4D] focus:outline-none transition-all text-zinc-800"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault(); 
+                  handleSendMessage();
+                }
+              }}
+              placeholder="Type your message here…"
+              rows={2}
+              className="
+                w-[680px]
+                p-4 pr-16
+                bg-white border border-[#003d4d]
+                rounded-xl
+                focus:border-[#003d4d] focus:outline-none
+                transition-all text-zinc-800
+                whitespace-pre-wrap break-words leading-relaxed
+              "
             />
           </div>
 
