@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import fs from "fs";
+import { routeMessage } from "../back-end/src/chatbot/router";
 
 export const app = express();
 
@@ -9,6 +10,15 @@ app.use(express.json());
 
 const data = fs.readFileSync("./mlabData.json", "utf-8");
 export const jsonMlabData = JSON.parse(data);
+
+app.post("/chat", async (req, res) => {
+  const { message } = req.body;
+
+  const response = await routeMessage(message);
+
+  res.json(response);
+});
+
 
 
 app.listen(3000, () => {
