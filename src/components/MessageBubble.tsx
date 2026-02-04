@@ -1,10 +1,9 @@
 interface MessageProps {
   text: string;
   sender: "user" | "bot";
-  isSpecial?: boolean;
 }
 
-const MessageBubble = ({ text, sender, isSpecial }: MessageProps) => {
+const MessageBubble = ({ text, sender }: MessageProps) => {
   if (sender === "user") {
     return (
       <div className="flex justify-end mb-4">
@@ -41,8 +40,7 @@ const MessageBubble = ({ text, sender, isSpecial }: MessageProps) => {
         text-black
         border
         border-[#a6ce39]
-        shadow-sm
-        ${isSpecial ? "bg-[#f7fbe9]" : ""}
+        shadow-smbg-[#f7fbe9]
       `}
     >
       {text}
