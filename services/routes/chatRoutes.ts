@@ -1,6 +1,6 @@
 //TODO 
 //import gemini functtion
-import { jsonMlabData, app, logMessage } from "./server.ts";
+import { jsonMlabData, app, logMessage } from "../server.ts";
 
 app.post("/chat", async (req, res) => {
     
@@ -19,13 +19,13 @@ app.post("/chat", async (req, res) => {
     }
 });
 
-app.post("/context", (req, res) => {
+app.post("/category", (req, res) => {
 
-    const { context } = req.body;
+    const { category } = req.body;
 
     //TODO call Thembi's context gemini function with message and jsonData initialize it to "answer" askGemini(message, jsonMlabData)
-    const answer = "This is a placeholder context answer"; //replace this line with the gemini function call
+    const answer = "This is a placeholder category answer"; //replace this line with the gemini function call
 
-    logMessage(context, "context_used");
+    logMessage(category, "category_used");
     return res.json({ reply: answer });
 })
