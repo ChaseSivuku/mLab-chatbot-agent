@@ -1,79 +1,70 @@
 interface MessageProps {
   text: string;
   sender: 'user' | 'bot';
+  timestamp?: Date;
 }
 
-const MessageBubble = ({ text, sender }: MessageProps) => {
-  if (sender === 'user') {
-    return (
-      <div className="flex justify-end mb-4">
-        {/* Added 'relative' so the tail stays attached to the bubble */}
-        <div className="
-          relative
-          bg-[#a6ce39] text-black 
-          px-6 py-3 rounded-2xl 
-          max-w-[80%] shadow-sm
-          break-words whitespace-pre-wrap
-        ">
-          {text}
+const formatTime = (date: Date) => {
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+};
 
-          {/* User Bubble tail positioned at the bottom right */}
-          <span
-            className="
-              absolute
-              -bottom-[6px]
-              right-4
-              w-4
-              h-4
-              bg-[#a6ce39]
-              rotate-45
-              rounded-sm
-            "
-          />
-        </div>
-      </div>
-    );
-  }
-
-  // BOT MESSAGE
+const MessageBubble = ({ text, sender, timestamp }: MessageProps) => {
   return (
-    <div className="flex justify-start mb-4">
-       {/* Added 'relative' and 'bg-white' to make the hollow effect work */}
-      <div className="
-        relative
-        mb-4 max-w-[85%] p-5 rounded-2xl 
-        text-black bg-white
-        break-words whitespace-pre-wrap border-2 border-[#a6ce39]
-      ">
-        {text}
+    <>
+      {/* Timestamp centered in the middle of the screen */}
+      {timestamp && (
+        <div className="w-full flex justify-center mb-2">
+          <span className="text-xs text-zinc-500">
+            {formatTime(timestamp)}
+          </span>
+        </div>
+      )}
+      
+      {/* Message bubble */}
+      {sender === 'user' ? (
+        <div className="flex justify-end items-end gap-2 mb-4">
+          <div className="flex flex-col items-end max-w-[80%] min-w-0">
+            <div className="
+              relative
+              bg-[#a6ce39] text-black 
+              px-6 py-3 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl rounded-br-none
+              shadow-sm
+              break-words whitespace-pre-wrap
+              word-break break-word
+              overflow-wrap break-word
+              leading-relaxed
+              w-full
+              min-w-0
+            ">
+              {text}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="flex justify-start items-start gap-2 mb-4">
+          <img
+            src="/chat-logo.jpg"
+            alt="Bot"
+            className="w-9 h-9 rounded-full object-cover flex-shrink-0 mt-0.5 border-2 border-[#a6ce39]"
+          />
+          <div className="flex flex-col max-w-[85%]">
+          <div className="
+  relative
+  mb-4
+  max-w-[85%]
+  p-4
+  bg-white text-black
+  border border-[#A6CE39]
+  shadow-sm
+  rounded-tr-2xl rounded-bl-2xl rounded-br-2xl rounded-tl-none
+">
 
-        {/* Bot Bubble tail border */}
-        <span
-          className="
-            absolute
-            -bottom-[7px]
-            left-4
-            w-3
-            h-3
-            bg-[#a6ce39]
-            rotate-45
-          "
-        />
-
-        {/* Bot Bubble tail fill - masks the border above to create the hollow tail */}
-        <span
-          className="
-            absolute
-            -bottom-[4px]
-            left-4
-            w-3
-            h-3
-            bg-white
-            rotate-45
-          "
-        />
-      </div>
-    </div>
+              {text}
+             </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
