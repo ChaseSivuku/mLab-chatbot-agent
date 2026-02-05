@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { X, Send } from "lucide-react";
 import MessageBubble from "../components/MessageBubble";
 import CategoryButton from "../components/CategoryButton";
+
 
 interface ChatbotModalProps {
   isOpen: boolean;
@@ -14,27 +15,31 @@ interface Message {
   text: string;
   sender: "user" | "bot";
   isSpecial?: boolean;
+  timestamp: Date;
 }
 
 const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
   const [inputValue, setInputValue] = useState("");
-
-  // 2. Initialize state with the first bot message
   const [messages, setMessages] = useState<Message[]>([]);
-
   const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-scroll to latest message when messages or typing state changes
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isTyping]);
 
   // 3. Define handleSelect to manage button clicks
   const handleSelect = (category: string) => {
-    // Add User Message
+    const now = new Date();
     const userMsg: Message = {
       id: Date.now().toString(),
       text: category,
       sender: "user",
+      timestamp: now,
     };
     setMessages((prev) => [...prev, userMsg]);
-
-    // Simulate Bot Thinking
     setIsTyping(true);
 
     setTimeout(() => {
@@ -54,6 +59,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
         text: botResponse,
         sender: "bot",
         isSpecial: special,
+        timestamp: new Date(),
       };
 
       setMessages((prev) => [...prev, botMsg]);
@@ -66,12 +72,18 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
     if (!inputValue.trim()) return;
     handleSelect(inputValue);
     setInputValue("");
+    // Reset textarea height to original size
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = "44px";
+    }
   };
+
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex">
+    <div className="fixed bottom-24 right-6 z-[100] flex">
       <div className="bg-white w-3xl max-w-4xl h-[85vh] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-zinc-200">
         
         {/* Header */}
@@ -100,7 +112,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-8 space-y-4 bg-zinc-50/50">
+        <main className="flex-1 overflow-y-auto p-8 space-y-4 bg-zinc-50/50 flex flex-col">
           
           {/* Friendly Intro Message */}
           <div className="max-w-3xl mb-6 text-zinc-700 text-sm leading-relaxed">
@@ -136,6 +148,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
               key={msg.id}
               sender={msg.sender}
               text={msg.text}
+              timestamp={msg.timestamp}
             />
           ))}
 
@@ -144,37 +157,50 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
               Thinking...
             </div>
           )}
+          <div ref={messagesEndRef} />
         </main>
 
-        <footer className="p-6 bg-white border-t border-zinc-100 flex items-center gap-1">
-          <div>
+        <footer className="p-4 bg-white border-t border-zinc-100 flex items-center gap-2 flex-shrink-0">
+          <div className="flex-1 min-w-0">
            <textarea
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault(); 
-                  handleSendMessage();
-                }
-              }}
-              placeholder="Type your message here…"
-              rows={2}
-              className="
-                w-[680px]
-                p-4 pr-16
-                bg-white border border-[#003d4d]
-                rounded-xl
-                focus:border-[#003d4d] focus:outline-none
-                transition-all text-zinc-800
-                whitespace-pre-wrap break-words leading-relaxed
-              "
-            />
+  ref={textareaRef}
+  value={inputValue}
+  onChange={(e) => {
+    setInputValue(e.target.value);
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 120)}px`;
+    }
+  }}
+  onKeyDown={(e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  }}
+  placeholder="Type your message here…"
+  rows={1}
+  className="
+    w-full max-w-full
+    min-h-[44px] max-h-[120px]
+    p-3 pr-16
+    text-base
+    bg-white border border-[#003d4d]
+    rounded-xl
+    focus:border-[#003d4d] focus:outline-none
+    transition-all text-zinc-800
+    whitespace-pre-wrap break-words leading-relaxed
+    resize-none overflow-y-auto
+    hide-scrollbar
+  "
+/>
+
           </div>
 
           <div>
             <button
               onClick={handleSendMessage}
-              className="p-2.5 bg-[#003D4D] text-white rounded-full hover:bg-[#002A35] transition-transform active:scale-95"
+              className="p-2.5 bg-[#003D4D] bottom-10 text-white rounded-full hover:bg-[#002A35] transition-transform active:scale-95"
             >
               <Send size={20} />
             </button>
