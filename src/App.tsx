@@ -10,7 +10,7 @@ function App() {
       {/* The trigger button */}
       <button 
         onClick={() => setIsChatOpen(true)}
-        className="bg-[#003d4d] text-white px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-all"
+        className="bg-[#a6ce39] text-white px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-all"
       >
        <img src="/smile.png" alt="Chat Icon" className="w-8 h-8 mr-2 inline-block" /> Chat with us
       </button>
