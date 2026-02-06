@@ -18,6 +18,44 @@ interface Message {
   timestamp: Date;
 }
 
+// API configuration - use relative path for proxy in development, or full URL for production
+const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
+
+// API helper functions
+const sendChatMessage = async (message: string): Promise<string> => {
+  const response = await fetch(`${API_BASE_URL}/chat`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ message }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.reply;
+};
+
+const sendCategoryRequest = async (category: string): Promise<string> => {
+  const response = await fetch(`${API_BASE_URL}/category`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ category }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.reply;
+};
+
 const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -31,7 +69,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
   }, [messages, isTyping]);
 
   // 3. Define handleSelect to manage button clicks
-  const handleSelect = (category: string) => {
+  const handleSelect = async (category: string) => {
     const now = new Date();
     const userMsg: Message = {
       id: Date.now().toString(),
@@ -42,40 +80,71 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
     setMessages((prev) => [...prev, userMsg]);
     setIsTyping(true);
 
-    setTimeout(() => {
-      let botResponse = "";
-      let special = false;
-
-      if (category === "Eligibility") {
-        botResponse =
-          "Our general eligibility criteria are: South African citizen (18-35), currently unemployed, and a minimum NQF Level 5 in IT or Computer Science.";
-        special = true;
-      } else {
-        botResponse = `Our general eligibility criteria are: South African citizen (18-35), currently unemployed, and a minimum NQF Level 5 in IT or Computer Science."`;
-      }
-
+    try {
+      const botResponse = await sendCategoryRequest(category);
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
         text: botResponse,
         sender: "bot",
-        isSpecial: special,
         timestamp: new Date(),
       };
-
       setMessages((prev) => [...prev, botMsg]);
+    } catch (error) {
+      console.error("Error fetching category response:", error);
+      const errorMsg: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I'm experiencing technical difficulties. Please try again later or contact mLab support.",
+        sender: "bot",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMsg]);
+    } finally {
       setIsTyping(false);
-    }, 1000);
+    }
   };
 
   // 4. Handle Text Input Submission
-  const handleSendMessage = () => {
-    if (!inputValue.trim()) return;
-    handleSelect(inputValue);
+  const handleSendMessage = async () => {
+    if (!inputValue.trim() || isTyping) return;
+
+    const messageText = inputValue.trim();
+    const now = new Date();
+    const userMsg: Message = {
+      id: Date.now().toString(),
+      text: messageText,
+      sender: "user",
+      timestamp: now,
+    };
+    setMessages((prev) => [...prev, userMsg]);
     setInputValue("");
+    setIsTyping(true);
+
     // Reset textarea height to original size
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = "44px";
+    }
+
+    try {
+      const botResponse = await sendChatMessage(messageText);
+      const botMsg: Message = {
+        id: (Date.now() + 1).toString(),
+        text: botResponse,
+        sender: "bot",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, botMsg]);
+    } catch (error) {
+      console.error("Error fetching chat response:", error);
+      const errorMsg: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I'm experiencing technical difficulties. Please try again later or contact mLab support.",
+        sender: "bot",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMsg]);
+    } finally {
+      setIsTyping(false);
     }
   };
 
