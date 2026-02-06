@@ -1,4 +1,3 @@
-
 interface CategoryButtonProps {
   label: string;
   onClick: () => void;
@@ -8,9 +7,10 @@ const CategoryButton = ({ label, onClick }: CategoryButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className="py-3 px-6 bg-white border border-zinc-200 rounded-xl text-blackfont-medium hover:border-[#a6ce39] hover:bg-[#a6ce39] hover:shadow-sm transition-all text-center"
+      className="py-2 px-5 bg-white border border-[#A6CE39] rounded-xl text-blackfont-medium hover:border-[#A6CE39] hover:bg-[#A6CE39] hover:shadow-sm transition-all text-center"
     >
-      {label}
+            {label}
+          
     </button>
   );
 };
