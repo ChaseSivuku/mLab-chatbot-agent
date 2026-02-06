@@ -58,10 +58,10 @@ const listAvailableModels = async (apiKey: string): Promise<string[]> => {
     
     const data = await response.json();
     const models = data.models?.map((m: any) => m.name?.replace("models/", "")) || [];
-    console.log("📋 Available models:", models);
+    console.log(" Available models:", models);
     return models;
   } catch (error) {
-    console.warn("⚠️  Error listing models:", error);
+    console.warn("  Error listing models:", error);
     return [];
   }
 };
@@ -73,7 +73,7 @@ export const generateResponse = async (
   const apiKey = process.env.VITE_GEMINI_API_KEY;
 
   if (!apiKey) {
-    console.error("❌ ERROR: API Key not found in environment variables");
+    console.error(" ERROR: API Key not found in environment variables");
     console.error("   Make sure VITE_GEMINI_API_KEY is set in your .env file");
     throw new Error(
       "API Key is missing. Check your .env file for VITE_GEMINI_API_KEY",
@@ -140,7 +140,7 @@ export const generateResponse = async (
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
         if (attempt === 1 && !workingModel) {
-          console.log(`🔄 Trying model: ${modelName}`);
+          console.log(` Trying model: ${modelName}`);
         }
 
         // Try SDK first
@@ -163,7 +163,7 @@ export const generateResponse = async (
           // Success! This model works
           if (!workingModel) {
             workingModel = modelName;
-            console.log(`✅ Successfully using model: ${modelName} (via SDK)`);
+            console.log(` Successfully using model: ${modelName} (via SDK)`);
           }
 
           return text;
@@ -204,7 +204,7 @@ export const generateResponse = async (
               
               if (!workingModel) {
                 workingModel = modelName;
-                console.log(`✅ Successfully using model: ${modelName} (via raw fetch)`);
+                console.log(` Successfully using model: ${modelName} (via raw fetch)`);
               }
               
               return text;
@@ -221,7 +221,7 @@ export const generateResponse = async (
         
         // If it's a 404 (model not found), try next model
         if (error.status === 404) {
-          console.warn(`⚠️  Model ${modelName} not available (404), trying next model...`);
+          console.warn(`  Model ${modelName} not available (404), trying next model...`);
           allModelsRateLimited = false; // Not all are rate limited, some are just not found
           break; // Break out of retry loop, try next model
     }
@@ -245,7 +245,7 @@ export const generateResponse = async (
             : Math.min(attempt * 2, 10); // Exponential backoff: 2s, 4s, 8s
           
           // Log detailed error information
-          console.warn(`⚠️  Rate limit hit (model: ${modelName}, attempt ${attempt}/${maxRetries})`);
+          console.warn(`  Rate limit hit (model: ${modelName}, attempt ${attempt}/${maxRetries})`);
           if (quotaFailure?.violations) {
             console.warn(`   Quota violations:`, JSON.stringify(quotaFailure.violations, null, 2));
           }
@@ -256,7 +256,7 @@ export const generateResponse = async (
             continue; // Retry same model
           } else {
             // Max retries reached for this model - try next model
-            console.warn(`⚠️  Model ${modelName} rate limited after ${maxRetries} attempts, trying next model...`);
+            console.warn(`  Model ${modelName} rate limited after ${maxRetries} attempts, trying next model...`);
             break; // Break out of retry loop, try next model
           }
         }
@@ -273,7 +273,7 @@ export const generateResponse = async (
   }
   
   // If we get here, all models failed
-  console.error("❌ All models failed. Models tried:", modelsTried.join(", "));
+  console.error(" All models failed. Models tried:", modelsTried.join(", "));
   console.error("   Last error:", lastError?.message || "Unknown error");
   
   // Provide specific error message based on what happened

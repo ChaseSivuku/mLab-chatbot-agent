@@ -1,5 +1,6 @@
 import { jsonMlabData, logMessage } from "../app.js";
 import { generateResponse } from "../aiService.js";
+import { askGemini } from "../gemini.js";
 import express from "express";
 
 const route = express.Router();
@@ -33,14 +34,21 @@ route.post("/chat", async (req, res) => {
   }
 });
 
-route.post("/category", (req, res) => {
+route.post("/category", async (req, res) => {
   const { category } = req.body;
 
-  //TODO call Thembi's context gemini function with message and jsonData initialize it to "answer" askGemini(message, jsonMlabData)
-  const answer = "This is a placeholder category answer"; //replace this line with the gemini function call
-
-  logMessage(category, "category_used");
-  return res.json({ reply: answer });
+  try {
+    // Call askGemini function with category
+    const answer = await askGemini(category);
+    logMessage(category, "category_used");
+    return res.json({ reply: answer });
+  } catch (error) {
+    console.error("Error in /category endpoint:", error);
+    logMessage(category, "error");
+    return res.status(500).json({
+      reply: "I'm experiencing technical difficulties. Please try again later or contact mLab support.",
+    });
+  }
 });
 
 export default route;
