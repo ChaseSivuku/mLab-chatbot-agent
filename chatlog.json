@@ -33,3 +33,6 @@
 {"message":"what is codetribe","status":"success","timestamp":"2026-02-06T08:38:41.242Z"}
 {"status":"category_used","timestamp":"2026-02-06T08:39:17.153Z"}
 {"message":"applications","status":"category_used","timestamp":"2026-02-06T08:40:37.137Z"}
+{"message":"Location","status":"category_used","timestamp":"2026-02-09T12:51:45.875Z"}
+{"message":"tell me more","status":"escalated","timestamp":"2026-02-09T12:56:19.446Z"}
+{"message":"Is there a codetribe in Polokwane?","status":"success","timestamp":"2026-02-09T12:58:53.549Z"}
