@@ -174,7 +174,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
 
             <button
               onClick={onClose}
-              className="p-1 hover:bg-white/10 rounded-full transition-colors"
+              className="p-1 hover:bg-white/10 cursor-pointer rounded-full transition-colors"
             >
               <X size={28} />
             </button>
@@ -196,7 +196,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
           </div>
 
           {/* Quick Actions Menu */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 my-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3  my-6">
             {[
               "Programs",
               "Applications",
@@ -208,8 +208,10 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
                 key={cat}
                 label={cat}
                 onClick={() => handleSelect(cat)}
+                
               />
-            ))}
+            ))
+            }
           </div>
 
           {messages.map((msg) => (
@@ -269,7 +271,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
           <div>
             <button
               onClick={handleSendMessage}
-              className="p-2.5 bg-[#003D4D] bottom-10 text-white rounded-full hover:bg-[#002A35] transition-transform active:scale-95"
+              className="p-2.5 bg-[#003D4D] cursor-pointer bottom-10 text-white rounded-full hover:bg-[#002A35] transition-transform active:scale-95"
             >
               <Send size={20} />
             </button>
