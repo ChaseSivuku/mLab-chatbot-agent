@@ -8,7 +8,17 @@ const formatTime = (date: Date) => {
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 };
 
+/** Renders text with **bold** markdown as actual bold (React elements, no HTML injection). */
+const renderTextWithMarkdown = (raw: string) => {
+  const parts = raw.split(/\*\*(.+?)\*\*/g);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+  );
+};
+
 const MessageBubble = ({ text, sender, timestamp }: MessageProps) => {
+  const content = sender === 'bot' ? renderTextWithMarkdown(text) : text;
+
   return (
     <>
       {/* Timestamp centered in the middle of the screen */}
@@ -59,7 +69,7 @@ const MessageBubble = ({ text, sender, timestamp }: MessageProps) => {
   rounded-tr-2xl rounded-bl-2xl rounded-br-2xl rounded-tl-none
 ">
 
-              {text}
+              {content}
              </div>
           </div>
         </div>
