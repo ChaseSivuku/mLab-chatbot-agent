@@ -22,6 +22,7 @@ An intelligent AI-powered chatbot for mLab South Africa that helps users get inf
 - **Lucide React** - Icons
 
 ### Backend
+- **Hosted at** - https://mlab-chatbot-agent.onrender.com
 - **Express.js** - REST API server
 - **Node.js** - Runtime environment
 - **TypeScript** - Type safety
