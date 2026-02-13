@@ -152,22 +152,22 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-24 right-6 z-[100] flex">
-      <div className="bg-white w-3xl max-w-4xl h-[85vh] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-zinc-200">
+    <div className="fixed inset-0 sm:inset-auto sm:bottom-20 sm:right-4 sm:left-auto z-[100] flex items-end sm:items-start justify-center sm:justify-end p-0 sm:p-0">
+      <div className="bg-white w-full h-full sm:w-[90vw] sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl sm:h-[85vh] sm:max-h-[90vh] sm:rounded-xl shadow-2xl flex flex-col overflow-hidden border-0 sm:border border-zinc-200">
         
         {/* Header */}
-        <header className="bg-[#003d4d] p-5 flex justify-between items-center text-white">
+        <header className="bg-[#003d4d] p-3 sm:p-4 md:p-5 flex justify-between items-center text-white flex-shrink-0">
           
           {/* Left: Logo */}
-          <div className="flex items-center gap-4">
-            <img src="/logo.png" alt="mLab Logo" className="h-8" />
+          <div className="flex items-center gap-2 sm:gap-4">
+            <img src="/logo.png" alt="mLab Logo" className="h-6 sm:h-7 md:h-8" />
           </div>
 
           {/* Right: Online status + Close */}
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full border border-white/20">
-              <div className="w-2.5 h-2.5 bg-[#a6ce39] rounded-full animate-pulse" />
-              <span className="text-xs font-medium uppercase tracking-wider">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+            <div className="hidden sm:flex items-center gap-2 bg-white/10 px-2 sm:px-3 py-1 rounded-full border border-white/20">
+              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-[#a6ce39] rounded-full animate-pulse" />
+              <span className="text-[10px] sm:text-xs font-medium uppercase tracking-wider">
                 Online
               </span>
             </div>
@@ -175,16 +175,17 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
             <button
               onClick={onClose}
               className="p-1 hover:bg-white/10 cursor-pointer rounded-full transition-colors"
+              aria-label="Close chat"
             >
-              <X size={28} />
+              <X size={24} className="sm:w-7 sm:h-7" />
             </button>
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-8 space-y-4 bg-zinc-50/50 flex flex-col">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4 bg-zinc-50/50 flex flex-col">
           
           {/* Friendly Intro Message */}
-          <div className="max-w-3xl mb-6 text-zinc-700 text-sm leading-relaxed">
+          <div className="max-w-3xl mb-4 sm:mb-6 text-zinc-700 text-xs sm:text-sm leading-relaxed">
             <p>
               <span className="font-bold text-[#003D4D]">Hello!</span> I am your{" "}
               <span className="font-medium text-[#003D4D]">
@@ -196,7 +197,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
           </div>
 
           {/* Quick Actions Menu */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3  my-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 my-4 sm:my-6">
             {[
               "Programs",
               "Applications",
@@ -224,14 +225,14 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
           ))}
 
           {isTyping && (
-            <div className="text-[#a6ce39] font-medium italic animate-pulse">
+            <div className="text-[#a6ce39] font-medium italic animate-pulse text-sm sm:text-base">
               Thinking...
             </div>
           )}
           <div ref={messagesEndRef} />
         </main>
 
-        <footer className="p-4 bg-white border-t border-zinc-100 flex items-center gap-2 flex-shrink-0">
+        <footer className="p-3 sm:p-4 bg-white border-t border-zinc-100 flex items-end gap-2 flex-shrink-0">
           <div className="flex-1 min-w-0">
            <textarea
   ref={textareaRef}
@@ -253,9 +254,9 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
   rows={1}
   className="
     w-full max-w-full
-    min-h-[44px] max-h-[120px]
-    p-3 pr-16
-    text-base
+    min-h-[40px] sm:min-h-[44px] max-h-[120px]
+    p-2.5 sm:p-3 pr-12 sm:pr-16
+    text-sm sm:text-base
     bg-white border border-[#003d4d]
     rounded-xl
     focus:border-[#003d4d] focus:outline-none
@@ -268,12 +269,13 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
 
           </div>
 
-          <div>
+          <div className="flex-shrink-0">
             <button
               onClick={handleSendMessage}
-              className="p-2.5 bg-[#003D4D] cursor-pointer bottom-10 text-white rounded-full hover:bg-[#002A35] transition-transform active:scale-95"
+              className="p-2 sm:p-2.5 bg-[#003D4D] cursor-pointer text-white rounded-full hover:bg-[#002A35] transition-transform active:scale-95"
+              aria-label="Send message"
             >
-              <Send size={20} />
+              <Send size={18} className="sm:w-5 sm:h-5" />
             </button>
           </div>
         </footer>
