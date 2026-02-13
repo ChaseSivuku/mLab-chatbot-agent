@@ -15,6 +15,7 @@ An intelligent AI-powered chatbot for mLab South Africa that helps users get inf
 ## 🛠️ Tech Stack
 
 ### Frontend
+- **Hosted at** - https://mlab-chatbot-agent-web.onrender.com
 - **React 19** - UI framework
 - **TypeScript** - Type safety
 - **Vite** - Build tool and dev server
