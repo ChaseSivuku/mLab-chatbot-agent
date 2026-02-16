@@ -42,8 +42,7 @@ function App() {
         className="bg-[#a6ce39] cursor-pointer text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-full font-medium hover:bg-opacity-90 transition-all text-sm sm:text-base shadow-lg"
       >
         <img src="/smile.png" alt="Chat Icon" className="w-6 h-6 sm:w-8 sm:h-8 mr-1.5 sm:mr-2 inline-block" /> 
-        <span className="hidden xs:inline sm:inline">Chat with us</span>
-        <span className="xs:hidden">Chat</span>
+        <span className="xs:inline sm:inline">Chat with us</span>
       </button>
 
       {/* Cookie consent – shows after "Chat with us", then opens chat */}

@@ -165,12 +165,6 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
 
           {/* Right: Online status + Close */}
           <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-            <div className="hidden sm:flex items-center gap-2 bg-white/10 px-2 sm:px-3 py-1 rounded-full border border-white/20">
-              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-[#a6ce39] rounded-full animate-pulse" />
-              <span className="text-[10px] sm:text-xs font-medium uppercase tracking-wider">
-                Online
-              </span>
-            </div>
 
             <button
               onClick={onClose}
