@@ -9,3 +9,28 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+/* Ensure touch targets are accessible on mobile */
+@media (max-width: 640px) {
+  button:not(.no-min-touch) {
+    min-height: 44px;
+  }
+}
+
+/* Improve text rendering on mobile */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Safe area insets for iOS devices */
+@supports (padding: max(0px)) {
+  .safe-area-inset-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-inset-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+}
