@@ -44,11 +44,11 @@ Before you begin, ensure you have the following installed:
 - **npm** (v9 or higher)
 - **Google Gemini API Key** ([Get one here](https://ai.google.dev/))
 
-##Colaboartors
-- **Musiki Sithomola
-- **Thembelihle Maluka
-- **Ashley Matsekoleng
-- **Mondli Khoza
+## Colaboartors
+- **Musiki Sithomola**
+- **Thembelihle Maluka**
+- **Ashley Matsekoleng**
+- **Mondli Khoza**
 
 
 ## 🔧 Installation
