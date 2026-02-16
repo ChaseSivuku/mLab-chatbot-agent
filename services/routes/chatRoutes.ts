@@ -21,11 +21,9 @@ route.post("/chat", async (req, res) => {
       logToSupabase(message, "escalated");
       return res.json({
         reply:
-          "I will pass this query to our mLab support team and will get back to you via email.",
+          "I am sorry but I do not have that information currently. I will pass this query to our mLab team.",
       });
     } else {
-      logMessage(message, "success");
-      logToSupabase(message, "success");
       res.json({ reply: answer });
     }
   } catch (error) {
@@ -44,14 +42,12 @@ route.post("/category", async (req, res) => {
   try {
     // Call askGemini function with category
     const answer = await askGemini(category);
-    logMessage(category, "category_used");
-    logToSupabase(category, "category_used");
     return res.json({ reply: answer });
 
   } catch (error) {
     console.error("Error in /category endpoint:", error);
-    logMessage(category, "error");
-    logToSupabase(category, "error");
+    // logMessage(category, "error");
+    // logToSupabase(category, "error");
     return res.status(500).json({
       reply: "I'm experiencing technical difficulties. Please try again later or contact mLab support.",
     });
