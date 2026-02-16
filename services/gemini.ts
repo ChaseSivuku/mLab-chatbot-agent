@@ -6,6 +6,7 @@ dotenv.config();
 const MODEL_NAME = "gemini-2.5-flash";
 
 const ENDPOINTS = [
+  "https://mlab-knowledge-api.vercel.app/docs/programmes",
   "https://mlab-knowledge-api.vercel.app/api/eligibility/c76a6628-455f-4afa-9fba-6125f6ff7c40",
   "https://mlab-knowledge-api.vercel.app/api/application-process/c76a6628-455f-4afa-9fba-6125f6ff7c40",
   "https://mlab-knowledge-api.vercel.app/api/curriculum/c76a6628-455f-4afa-9fba-6125f6ff7c40",
