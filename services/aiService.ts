@@ -1,13 +1,13 @@
 import dotenv from "dotenv";
-import { getMlabData } from "./dataLoader.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { getMlabData } from "./dataLoader.js";
 
 dotenv.config();
 
 const MODEL_NAME = "gemini-2.5-flash";
 
-export const askGemini = async (
-  category: string,
+export const generateResponse = async (
+  userMessage: string,
 ): Promise<string> => {
   const apiKey = process.env.VITE_GEMINI_API_KEY;
 
@@ -21,21 +21,29 @@ export const askGemini = async (
 
   // Fetch live data from the API (cached after first call)
   const mlabData = await getMlabData();
-  const info = JSON.stringify(mlabData);
+  const data = JSON.stringify(mlabData);
 
   const systemInstructions = `
-You are an AI assistant for mLab South Africa.
-The user just clicked a chip that corresponds to the category they are interested in. The category is: ${category}.
-Use the following data to answer questions about ${category}: ${info}
-Give them a summary of the information related to the category they selected. Be friendly and professional.
-- Keep it very short and concise. Do not use any emojis.
-- Ask them what more questions they have`;
+    You are an AI assistant for mLab South Africa. 
+    Use the following data to answer questions: ${data}.
+    
+    Rules:
+    - If asked about CodeTribe, explain it's a 6-month programme for youth.
+    - If asked about applications, mention the requirements (ID, CV, Grade 12).
+    - If you do not have the info, say you will ask the team at mlab. and respond with something containing "escalated".
+    - Be friendly and human like. And do not use any emojis.
+    - You can answer any questions they have about you also but in relation to mlab, not technical questions.
+    - The user did not give an email address, so do not ask for one. and do not say you will get back to them via email.
+    - If anything is beyond your knowledge, say you will ask the team at mlab. and respond with something containing "escalated".
+    - Keep answers concise, friendly and professional.
+    - If its incoherent just say you do not understand.
+  `;
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: MODEL_NAME });
     
-    const prompt = `${systemInstructions}\n\nUser Message: ${category}`;
+    const prompt = `${systemInstructions}\n\nUser Message: ${userMessage}`;
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();

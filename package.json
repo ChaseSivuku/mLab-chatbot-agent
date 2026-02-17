@@ -7,31 +7,27 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "tsx services/app.ts"
   },
   "dependencies": {
-<<<<<<< HEAD
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.95.3",
+    "@tailwindcss/vite": "^4.1.18",
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-=======
-    "@google/generative-ai": "^0.24.1",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
+    "lucide-react": "^0.563.0",
     "node-fetch": "^3.3.2",
->>>>>>> f11a1ca77aa79c695498129089376801f2cbd530
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
-<<<<<<< HEAD
-    "@types/node": "^24.10.10",
-=======
     "@types/node": "^24.10.1",
->>>>>>> f11a1ca77aa79c695498129089376801f2cbd530
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
