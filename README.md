@@ -2,6 +2,11 @@
 
 An intelligent AI-powered chatbot for mLab South Africa that helps users get information about mLab programs, applications, and services. Built with React, TypeScript, Express, and Google's Gemini AI.
 
+## UX
+- **Userflow**: https://www.figma.com/board/QzD1xteTqzTLyZp7mdFVeh/Untitled?node-id=0-1&t=UxWNovKZg5O6muEV-1 
+- **Sitemap**: https://www.figma.com/board/5Z0uRfIECqEtcprBmpVM8l/mLab-Chatbot-Sitemap?node-id=0-1&t=6vZf44i6wFndR8yR-1
+- **Figma Design**: https://www.figma.com/design/1OGtauBfLLAbIRaYQ7L27g/mLab-Assistant-Bot?node-id=0-1&p=f&t=wnVp4Uuy2hwIZ9WV-0
+
 ## 🚀 Features
 
 - **AI-Powered Conversations**: Uses Google Gemini AI to provide intelligent, context-aware responses
@@ -39,11 +44,11 @@ Before you begin, ensure you have the following installed:
 - **npm** (v9 or higher)
 - **Google Gemini API Key** ([Get one here](https://ai.google.dev/))
 
-##Colaboartors
-- **Musiki Sithomola
-- **Thembelihle Maluka
-- **Ashley Matsekoleng
-- **Mondli Khoza
+## Colaboartors
+- **Musiki Sithomola**
+- **Thembelihle Maluka**
+- **Ashley Matsekoleng**
+- **Mondli Khoza**
 
 
 ## 🔧 Installation
