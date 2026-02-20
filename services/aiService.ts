@@ -1,13 +1,16 @@
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { jsonMlabData } from "./dataLoader.js";
+// import * as apiData from "./knowledgeApiService.js"
 
 dotenv.config();
 
 const MODEL_NAME = "gemini-2.5-flash";
-
+// const releventData = apiData.fetchRelevantData()
 export const generateResponse = async (
   userMessage: string,
+  releventData: any,
+  rawData: any
 ): Promise<string> => {
   const apiKey = process.env.VITE_GEMINI_API_KEY;
 
@@ -19,11 +22,14 @@ export const generateResponse = async (
     );
   }
 
-  const data = JSON.stringify(jsonMlabData);
+
+
+  // const data = JSON.stringify(jsonMlabData);
 
   const systemInstructions = `
     You are an AI assistant for mLab South Africa. 
-    Use the following data to answer questions: ${data}.
+    Use the following data to answer questions: ${releventData}.
+    if there is no relevant data, use the raw data: ${rawData}.
     
     Rules:
     - If asked about CodeTribe, explain it's a 6-month programme for youth.

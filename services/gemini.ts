@@ -5,10 +5,13 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 dotenv.config();
 
 const MODEL_NAME = "gemini-2.5-flash";
-const info = JSON.stringify(jsonMlabData);
+// const info = JSON.stringify(jsonMlabData);
+
+
 
 export const askGemini = async (
   category: string,
+  data: any
 ): Promise<string> => {
   const apiKey = process.env.VITE_GEMINI_API_KEY;
 
@@ -23,7 +26,7 @@ export const askGemini = async (
   const systemInstructions = `
 You are an AI assistant for mLab South Africa.
 The user just clicked a chip that corresponds to the category they are interested in. The category is: ${category}.
-Use the following data to answer questions about ${category}: ${info}
+Use the following data to answer questions about ${category}: ${data}
 Give them a summary of the information related to the category they selected. Be friendly and professional.
 - Keep it very short and concise. Do not use any emojis.
 - Ask them what more questions they have`;
