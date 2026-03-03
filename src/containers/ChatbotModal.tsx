@@ -154,10 +154,10 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
   return (
     <div className="fixed inset-0 sm:inset-auto sm:bottom-20 sm:right-4 sm:left-auto z-[100] flex items-end sm:items-start justify-center sm:justify-end p-0 sm:p-0">
       <div className="bg-white w-full h-full sm:w-[90vw] sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl sm:h-[85vh] sm:max-h-[90vh] sm:rounded-xl shadow-2xl flex flex-col overflow-hidden border-0 sm:border border-zinc-200">
-        
+
         {/* Header */}
         <header className="bg-[#003d4d] p-3 sm:p-4 md:p-5 flex justify-between items-center text-white flex-shrink-0">
-          
+
           {/* Left: Logo */}
           <div className="flex items-center gap-2 sm:gap-4">
             <img src="/logo.png" alt="mLab Logo" className="h-6 sm:h-7 md:h-8" />
@@ -177,7 +177,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
         </header>
 
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4 bg-zinc-50/50 flex flex-col">
-          
+
           {/* Friendly Intro Message */}
           <div className="max-w-3xl mb-4 sm:mb-6 text-zinc-700 text-xs sm:text-sm leading-relaxed">
             <p>
@@ -203,7 +203,7 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
                 key={cat}
                 label={cat}
                 onClick={() => handleSelect(cat)}
-                
+
               />
             ))
             }
@@ -228,25 +228,25 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
 
         <footer className="p-3 sm:p-4 bg-white border-t border-zinc-100 flex items-end gap-2 flex-shrink-0">
           <div className="flex-1 min-w-0">
-           <textarea
-  ref={textareaRef}
-  value={inputValue}
-  onChange={(e) => {
-    setInputValue(e.target.value);
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 120)}px`;
-    }
-  }}
-  onKeyDown={(e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  }}
-  placeholder="Type your message here…"
-  rows={1}
-  className="
+            <textarea
+              ref={textareaRef}
+              value={inputValue}
+              onChange={(e) => {
+                setInputValue(e.target.value);
+                if (textareaRef.current) {
+                  textareaRef.current.style.height = "auto";
+                  textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 120)}px`;
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendMessage();
+                }
+              }}
+              placeholder="Type your message here…"
+              rows={1}
+              className="
     w-full max-w-full
     min-h-[40px] sm:min-h-[44px] max-h-[120px]
     p-2.5 sm:p-3 pr-12 sm:pr-16
@@ -259,14 +259,14 @@ const ChatbotModal = ({ isOpen, onClose }: ChatbotModalProps) => {
     resize-none overflow-y-auto
     hide-scrollbar
   "
-/>
+            />
 
           </div>
 
           <div className="flex-shrink-0">
             <button
               onClick={handleSendMessage}
-              className="p-2 sm:p-2.5 bg-[#003D4D] cursor-pointer text-white rounded-full hover:bg-[#002A35] transition-transform active:scale-95"
+              className="p-2 sm:p-2.5 bg-[#003D4D] mb-3 cursor-pointer text-white rounded-full hover:bg-[#002A35] transition-transform active:scale-95"
               aria-label="Send message"
             >
               <Send size={18} className="sm:w-5 sm:h-5" />
