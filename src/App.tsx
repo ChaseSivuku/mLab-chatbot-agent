@@ -40,25 +40,25 @@ function App() {
       {/*Navbar*/}
       <Navbar />
       <div className="relative flex-1 min-h-0 ">
-        {/* Background Image - ends above chatbot button */}
+        {/* Background Image - ends above chatbot button with small gap */}
         <div
-          className="absolute top-0 left-0 right-0 bottom-24 sm:bottom-24 md:bottom-20 bg-cover sm:bg-contain bg-center bg-no-repeat"
+          className="absolute top-0 left-0 right-0 bottom-28 sm:bottom-28 md:bottom-24 bg-cover sm:bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/pic.png')" }}
         ></div>
 
-        {/* Gradient Overlay - ends above chatbot button */}
-        <div className="absolute top-0 left-0 right-0 bottom-24 sm:bottom-24 md:bottom-20 bg-[#00303D]/90 opacity-99"></div>
+        {/* Gradient Overlay - ends above chatbot button with small gap */}
+        <div className="absolute top-0 left-0 right-0 bottom-28 sm:bottom-28 md:bottom-24 bg-[#00303D]/90 opacity-99"></div>
 
         {/* Page Content */}
         <div className="relative z-10 h-full flex flex-col">
-          <div className="flex flex-col min-h-0 flex-1 px-4 py-6 sm:px-6 sm:py-8 md:pl-12 md:pr-8 lg:pl-16 lg:pr-12">
-            <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-left leading-tight uppercase font-bold">
-              <span className="block pl-4 sm:pl-8 md:pl-12 lg:pl-16">Supporting</span>
-              <span className="block pl-0">Promising start-ups</span>
-              <span className="block pl-2 sm:pl-6 md:pl-10 lg:pl-12">To Become great</span>
-              <span className="block pl-4 sm:pl-8 md:pl-12 lg:pl-16">Businesses</span>
+          <div className="flex flex-col tracking-widest min-h-0 flex-1 px-4 py-6 sm:px-6 sm:py-8 md:px-8 lg:px-12 xl:px-16 max-w-full mt-12 sm:mt-16 md:mt-20 lg:mt-24 ml-4 sm:ml-8 md:ml-12 lg:ml-20 xl:ml-28">
+            <h1 className="font-oswald text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-left leading-tight uppercase max-w-full">
+              <span className="block">Supporting</span>
+              <span className="block">Promising start-ups</span>
+              <span className="block">To Become great</span>
+              <span className="block">Businesses</span>
             </h1>
-            <h3 className="text-white text-xs sm:text-sm ml-0 sm:ml-4 md:ml-10 max-w-2xl leading-snug">
+            <h3 className="text-white text-xs sm:text-sm md:text-base lg:text-lg mt-3 sm:mt-4 max-w-full lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl leading-snug">
               Registered Non-Profit (Mobile Applications Laboratory NPC) & Level 1 B-BBEE Skills & ESD Provider
             </h3>
           </div>
